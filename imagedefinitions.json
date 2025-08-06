@@ -1,6 +1,6 @@
 [
   {
-    "name": "task2-repo",
+    "name": "wordpress-app",
     "imageUri": "223938610529.dkr.ecr.us-east-1.amazonaws.com/task2-repo:latest"
   }
 ]
