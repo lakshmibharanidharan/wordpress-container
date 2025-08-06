@@ -9,11 +9,11 @@ phases:
     commands:
       - echo Building the Docker image...
       - docker build -t wordpress-app .
-      - docker tag wordpress-app:latest 223938610529.dkr.ecr.us-east-1.amazonaws.com/task2-repo:latest:latest
+      - docker tag wordpress-app:latest 223938610529.dkr.ecr.us-east-1.amazonaws.com/task2-repo:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push 223938610529.dkr.ecr.us-east-1.amazonaws.com/task2-repo:latest:latest
+      - docker push 223938610529.dkr.ecr.us-east-1.amazonaws.com/task2-repo:latest
       - echo Build completed on `date`
 artifacts:
   files: '**/*'
