@@ -19,8 +19,8 @@ phases:
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest
-      - printf '[{"name":"wordpress-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest > imagedefinitions.json
+      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-container:latest
+      - printf '[{"name":"wordpress-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-container:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
