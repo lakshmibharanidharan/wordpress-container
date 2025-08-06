@@ -5,7 +5,7 @@ env:
     ACCOUNT_ID: 223938610529
     AWS_REGION: us-east-1
     IMAGE_NAME: wordpress-app
-
+    REPOSITORY_URI: 223938610529.dkr.ecr.us-east-1.amazonaws.com/wordpress-container
 phases:
   pre_build:
     commands:
@@ -13,16 +13,14 @@ phases:
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 223938610529.dkr.ecr.us-east-1.amazonaws.com
   build:
     commands:
-      - echo Building the Docker image...
-      - docker build -t $IMAGE_NAME .
-      - docker tag $IMAGE_NAME:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:latest
+      - echo Build started on `date`
+      - docker build -t wordpress-app .
+      - docker tag wordpress-app:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
-      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:latest
-      - echo Writing image definitions...
-      - printf '[{"name":"wordpress-app","imageUri":"%s.dkr.ecr.%s.amazonaws.com/%s:latest"}]' $ACCOUNT_ID $AWS_REGION $IMAGE_NAME > imagedefinitions.json
-
+      - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest
+      - printf '[{"name":"wordpress-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
