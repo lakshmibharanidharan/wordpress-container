@@ -9,12 +9,12 @@ phases:
     commands:
       - echo Build started on `date`
       - docker build -t wordpress-app .
-      - docker tag wordpress-app:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest
+      - docker tag wordpress-container:latest $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-container:latest
   post_build:
     commands:
       - echo Pushing the Docker image...
       - docker push $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest
-      - printf '[{"name":"wordpress-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-app:latest > imagedefinitions.json
+      - printf '[{"name":"wordpress-container","imageUri":"%s"}]' $ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/wordpress-container:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
